@@ -33,6 +33,7 @@
     if (!image.complete || !image.naturalWidth) { notify('貓咪還在路上，請稍等一下再下載。'); return; }
     const button = document.querySelector('#download'); button.disabled = true; button.textContent = '正在製作…';
     try {
+      await document.fonts.load('900 76px "M PLUS Rounded 1c"').catch(() => {});
       const canvas = document.createElement('canvas'); canvas.width = 1200; canvas.height = 900;
       const ctx = canvas.getContext('2d');
       const scale = Math.max(canvas.width / image.naturalWidth, canvas.height / image.naturalHeight);
@@ -40,8 +41,8 @@
       ctx.drawImage(image, (canvas.width - width) / 2, (canvas.height - height) / 2, width, height);
       const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height); gradient.addColorStop(0, '#0005'); gradient.addColorStop(.25, 'transparent'); gradient.addColorStop(.68, 'transparent'); gradient.addColorStop(1, '#0006'); ctx.fillStyle = gradient; ctx.fillRect(0, 0, canvas.width, canvas.height);
       const drawText = (text, y, baseline) => {
-        const maxWidth = canvas.width * .88; let size = 76; ctx.textAlign = 'center'; ctx.textBaseline = baseline; ctx.font = `900 ${size}px "Noto Sans TC", "Arial Black", sans-serif`;
-        while (ctx.measureText(text).width > maxWidth && size > 30) { size -= 2; ctx.font = `900 ${size}px "Noto Sans TC", "Arial Black", sans-serif`; }
+        const maxWidth = canvas.width * .88; let size = 76; ctx.textAlign = 'center'; ctx.textBaseline = baseline; ctx.font = `900 ${size}px "M PLUS Rounded 1c", "Noto Sans TC", sans-serif`;
+        while (ctx.measureText(text).width > maxWidth && size > 30) { size -= 2; ctx.font = `900 ${size}px "M PLUS Rounded 1c", "Noto Sans TC", sans-serif`; }
         ctx.lineJoin = 'round'; ctx.lineWidth = Math.max(5, size * .105); ctx.strokeStyle = '#17120f'; ctx.fillStyle = '#fff'; ctx.shadowColor = '#0008'; ctx.shadowBlur = 6; ctx.shadowOffsetY = 3; ctx.strokeText(text, canvas.width / 2, y, maxWidth); ctx.fillText(text, canvas.width / 2, y, maxWidth); ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
       };
       drawText(topInput.value, 74, 'top'); drawText(bottomInput.value, 826, 'bottom');
