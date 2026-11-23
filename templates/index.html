@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff8ef">
+  <title>喵一下｜貓咪梗圖產生器</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script defer src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar"><a class="brand" href="/" aria-label="喵一下首頁"><span class="brand-icon">🐈</span> 喵一下</a><span class="top-note">把今天的心情，做成一張梗圖</span></header>
+    <section class="intro"><span class="eyebrow">CAT MEME STUDIO · 01</span><h1>你的梗圖，<span>喵</span>定了。</h1><p>挑一張貓、寫一句話，讓全世界懂你的心情。</p></section>
+    <section class="studio" aria-label="梗圖編輯器">
+      <div class="preview-panel"><div class="panel-heading"><div><span class="step">STEP 01</span><h2>選一位主角</h2></div><button id="refresh-cat" class="icon-button" type="button" aria-label="換一隻貓" title="換一隻貓">↻</button></div>
+        <div class="meme-stage" id="meme-stage"><img id="cat-image" alt="梗圖主角貓咪" crossorigin="anonymous"><div id="top-preview" class="meme-text top-text">今天也要加油</div><div id="bottom-preview" class="meme-text bottom-text">先睡個午覺</div><div id="loading" class="loading"><span>🐾</span> 正在找一位主角…</div></div>
+        <p id="image-note" class="image-note" aria-live="polite">圖片載入中…</p>
+      </div>
+      <div class="editor-panel"><div class="panel-heading"><div><span class="step">STEP 02</span><h2>寫下你的梗</h2></div></div>
+        <label for="top-text">上排文字 <span>通常放情境</span></label><input id="top-text" maxlength="60" value="今天也要加油" placeholder="輸入上排文字">
+        <label for="bottom-text">下排文字 <span>通常放反轉</span></label><input id="bottom-text" maxlength="60" value="先睡個午覺" placeholder="輸入下排文字">
+        <button id="random-caption" class="inspire-button" type="button"><span>✦</span> 給我一點靈感</button>
+        <div class="editor-divider"></div><div class="download-row"><div><strong>完成你的作品了嗎？</strong><small>高清 PNG，直接分享</small></div><button id="download" class="download-button" type="button"><span>↓</span> 下載梗圖</button></div>
+        <p class="privacy-note">你的文字只會在這個頁面上編輯，不會被保存。</p>
+      </div>
+    </section>
+    <footer>Made with <span>♥</span> and 猫毛 · 喵一下就好</footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
